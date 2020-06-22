@@ -25,8 +25,10 @@ import javax.management.ReflectionException;
  *
  * <pre>
  * <code>// Note that `setStatisticsEnabled(true)` is required to gather non-zero statistics
- * MutableConfiguration<String, String> configuration = new MutableConfiguration<String, String>().setStatisticsEnabled(true);
- * Cache<String, String> cache = Caching.getCachingProvider().getCacheManager().createCache("mycache", configuration);
+ * MutableConfiguration&lt;String, String&gt; configuration = new MutableConfiguration&lt;String, String&gt;()
+ *     .setStatisticsEnabled(true);
+ * Cache&lt;String, String&gt; cache = Caching.getCachingProvider().getCacheManager()
+ *     .createCache("mycache", configuration);
  * CacheMetricsCollector cacheMetrics = new CacheMetricsCollector().register();
  * cacheMetrics.addCache(cache);
  * </code>
@@ -67,9 +69,10 @@ public class CacheMetricsCollector extends Collector {
 
 
   /**
-   * Add or replace the cache with the given name.
+   * Add a cache, or replace a previous cache with the same name. The name of the cache will be the
+   * metrics label value.
    * <p>
-   * Any references any previous cache with this name is invalidated.
+   * Any reference to a previous cache with this name is invalidated.
    *
    * @param cache The cache being monitored
    */

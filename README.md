@@ -372,6 +372,19 @@ Cache<String, String> cache = Caffeine.newBuilder().recordStats().build();
 cacheMetrics.addCache("myCacheLabel", cache);
 ```
 
+To register the JSR107 (JCache) cache collector, be certain to *enable statistics* when configuring
+the cache and adding it to the registered collector.
+
+```java
+MutableConfiguration<String, String> configuration = new MutableConfiguration<String, String>()
+    .setStatisticsEnabled(true);
+Cache<String, String> cache = Caching.getCachingProvider().getCacheManager()
+    .createCache("mycache", configuration);
+CacheMetricsCollector cacheMetrics = new CacheMetricsCollector().register();
+cacheMetrics.addCache(cache);
+```
+
+
 ### Hibernate
 
 There is a collector for Hibernate which allows to collect metrics from one or more
