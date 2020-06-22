@@ -143,9 +143,7 @@ public class CacheMetricsCollector extends Collector {
 
       CacheManager cacheManager = c.getValue().getCacheManager();
       String cacheManagerUri = sanitize(cacheManager.getURI().toString());
-      // for (String cacheName : cacheManager.getCacheNames())
       {
-        // List<String> labelValues = Collections.singletonList(cacheName);
         ObjectName objectName = getCacheStatisticsObjectName(cacheManagerUri, sanitize(cacheName));
 
         MBeanLookup cacheStatistics = new MBeanLookup(mBeanServer, objectName);
@@ -160,36 +158,6 @@ public class CacheMetricsCollector extends Collector {
         }
       }
     }
-
-    // for (CachingProvider cachingProvider : Caching.getCachingProviders())
-    // {
-    // CacheManager cacheManager = cachingProvider.getCacheManager();
-    // String cacheManagerUri = sanitize(cacheManager.getURI().toString());
-    // for (String cacheName : cacheManager.getCacheNames())
-    // {
-    // List<String> labelValues = Collections.singletonList(cacheName);
-    // ObjectName objectName = getCacheStatisticsObjectName(cacheManagerUri,
-    // sanitize(cacheName));
-    //
-    // MBeanLookup cacheStatistics = new MBeanLookup(mBeanServer, objectName);
-    // if (cacheStatistics.isRegistered())
-    // {
-    // cacheHitTotal.addMetric(labelValues, cacheStatistics.get(Long.class,
-    // "CacheHits"));
-    // cacheMissTotal.addMetric(labelValues, cacheStatistics.get(Long.class,
-    // "CacheMisses"));
-    // cacheRequestsTotal.addMetric(labelValues, cacheStatistics.get(Long.class,
-    // "CacheGets"));
-    // cachePutTotal.addMetric(labelValues, cacheStatistics.get(Long.class,
-    // "CachePuts"));
-    // cacheEvictionTotal.addMetric(labelValues, cacheStatistics.get(Long.class,
-    // "CacheEvictions"));
-    // cacheRemoveTotal.addMetric(labelValues, cacheStatistics.get(Long.class,
-    // "CacheRemovals"));
-    // }
-    // }
-    //
-    // }
 
     return mfs;
   }
