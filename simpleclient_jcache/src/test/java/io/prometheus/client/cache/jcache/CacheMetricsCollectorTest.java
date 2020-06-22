@@ -3,7 +3,6 @@ package io.prometheus.client.cache.jcache;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeNotNull;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -25,8 +24,9 @@ public class CacheMetricsCollectorTest {
 
   @After
   public void closeCache() {
-    assumeNotNull(cache);
-    cache.close();
+    if (cache != null) {
+      cache.close();
+    }
   }
 
 
@@ -96,7 +96,6 @@ public class CacheMetricsCollectorTest {
     assertThat(metric(registry, "jcache_cache_load_duration_seconds_sum", "loadingusers"),
         nullValue());
   }
-
 
   private Double metric(CollectorRegistry registry, String name, String cacheName) {
     return registry.getSampleValue(name, new String[]{"cache"}, new String[]{cacheName});
